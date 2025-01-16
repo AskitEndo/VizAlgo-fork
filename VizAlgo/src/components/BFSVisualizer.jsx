@@ -148,13 +148,13 @@ export default function BFSGridVisualizer() {
           Reset Grid
         </button>
       </div>
-      <div className="grid grid-cols-10 gap-1">
+      <div className="grid grid-cols-10 gap-0.5 sm:gap-1 max-w-full overflow-x-auto">
         {grid.map((row, rowIndex) =>
           row.map((cell, colIndex) => (
             <div
               key={`${rowIndex}-${colIndex}`}
               onClick={() => handleCellClick(rowIndex, colIndex)}
-              className={`w-8 h-8 border ${
+              className={`w-4 h-4 sm:w-6 md:w-8 sm:h-6 md:h-8 border ${
                 cell.isSource
                   ? "bg-green-500"
                   : cell.isDestination

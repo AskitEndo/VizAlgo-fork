@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 // Import Visualizer Components
 import BubbleSortVisualizer from "../components/BubbleSortVisualizer";
@@ -67,6 +68,7 @@ const Algorithm = () => {
   const algorithmFromQuery = queryParams.get('name') || "Select an algorithm to visualize";
 
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithmFromQuery);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   // Scroll to the top when the selected algorithm changes
   useEffect(() => {
@@ -173,14 +175,33 @@ const Algorithm = () => {
     }
   };
 
+  // Function to toggle sidebar
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  // Close sidebar when algorithm is selected (mobile view)
   const handleAlgorithmClick = (algorithm) => {
     setSelectedAlgorithm(algorithm);
+    setSidebarOpen(false);
   };
 
   return (
-    <div className="flex flex-row min-h-screen">
-      {/* Left Section */}
-      <div className="w-1/3 bg-[#BDE8CA] p-4 overflow-y-auto">
+    <div className="flex flex-row min-h-screen min-w-[400px]">
+      {/* Hamburger Menu Button (visible only on small screens) */}
+      <button
+        onClick={toggleSidebar}
+        className="fixed top-20 left-4 z-50 p-2 rounded-md bg-[#0D7C66] text-white lg:hidden"
+      >
+        {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+      </button>
+
+      {/* Left Section - Algorithm List */}
+      <div
+        className={`fixed lg:relative w-full lg:w-1/3 h-full bg-[#BDE8CA] p-4 overflow-y-auto transition-transform duration-300 ease-in-out z-40 
+          ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+          lg:translate-x-0`}
+      >
         <h2 className="text-2xl font-bold text-[#0D7C66] mb-4">Algorithms</h2>
 
         {Object.keys(algorithms).map((category) => (
@@ -205,11 +226,19 @@ const Algorithm = () => {
         ))}
       </div>
 
+      {/* Overlay for mobile when sidebar is open */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Right Section */}
-      <div className="w-2/3 relative bg-[#ece8f2] p-8 gap-10 flex flex-col items-center">
+      <div className="flex-1 lg:w-2/3 bg-[#ece8f2] p-4 lg:p-8 gap-6 lg:gap-10 flex flex-col items-center">
         {/* Visualization Section */}
         <div
-          className="w-3/4 h-auto relative bg-[#D7C3F1] rounded-lg shadow-md flex items-center justify-center"
+          className="w-full lg:w-3/4 h-auto relative bg-[#D7C3F1] rounded-lg shadow-md flex items-center justify-center"
           style={{
             border: "4px solid #0D7C66",
             minHeight: "400px",

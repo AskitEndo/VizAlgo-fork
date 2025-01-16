@@ -42,17 +42,17 @@ const algorithms = [
 
 const HomePage = () => {
   return (
-    <main className="flex-1 bg-[#BDE8CA] py-12">
-      <div className="container mx-auto px-4">
+    <main className="flex-1 min-w-[400px] bg-[#BDE8CA] py-6 sm:py-12">
+      <div className="container mx-auto px-2 sm:px-4">
         {/* Quote Section */}
-        <div className="text-center my-12 max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-          <blockquote className="text-2xl font-extrabold text-[#0D7C66]">
+        <div className="text-center my-6 sm:my-12 max-w-2xl mx-auto bg-white p-4 sm:p-8 rounded-lg shadow-lg">
+          <blockquote className="text-xl sm:text-2xl font-extrabold text-[#0D7C66]">
             "Learning is enhanced when visualized, not just observed."
           </blockquote>
         </div>
 
         {/* Algorithm Categories */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
           {algorithms.map((category, index) => (
             <Link
               key={index}

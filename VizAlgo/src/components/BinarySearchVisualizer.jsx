@@ -81,44 +81,14 @@ export default function BinarySearchVisualizer() {
   };
 
   return (
-    <div className="w-full bg-[#D7C3F1] p-4 flex flex-col items-center justify-center">
-      <div className="flex items-center space-x-2 mt-4 mb-2">
-        <label htmlFor="size" className="font-medium text-sm">Array Size:</label>
-        <input
-          id="size"
-          type="number"
-          value={size}
-          onChange={handleSizeChange}
-          min="2"
-          max="20"
-          className="w-12 p-1 text-sm rounded border-2 border-[#0D7C66]"
-          disabled={isSearching}
-        />
-        <button
-          onClick={generateArray}
-          className="px-3 py-1 bg-[#0D7C66] text-white text-sm rounded hover:bg-[#41B3A2] transition"
-          disabled={isSearching}
-        >
-          Generate
-        </button>
-      </div>
-
-      <div className="flex items-center space-x-2 mt-4 mb-2">
-        <label htmlFor="target" className="font-medium text-sm">Target Value:</label>
-        <input
-          id="target"
-          type="number"
-          value={target || ""}
-          onChange={(e) => setTarget(e.target.value)}
-          className="w-12 p-1 text-sm rounded border-2 border-[#0D7C66]"
-          disabled={isSearching}
-        />
+    <div className="w-full flex flex-col items-center p-2 sm:p-4">
+      <div className="mb-2 sm:mb-4 flex space-x-2 sm:space-x-3">
         <button
           onClick={handleSearch}
-          className="px-3 py-1 bg-[#0D7C66] text-white text-sm rounded hover:bg-[#41B3A2] transition"
           disabled={isSearching || target === null || target === ""}
+          className="px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm bg-[#0D7C66] text-white rounded hover:bg-[#41B3A2] transition"
         >
-          Search
+          {isSearching ? "Searching..." : "Search"}
         </button>
         <button
           onClick={handleReset}
@@ -128,14 +98,14 @@ export default function BinarySearchVisualizer() {
         </button>
       </div>
 
-      <div className="flex justify-center items-center space-x-2 w-full h-40 mb-2">
+      <div className="flex justify-center items-center space-x-1 sm:space-x-2 w-full h-32 sm:h-40 mb-2">
         {array.map((value, index) => (
           <div
             key={index}
             id={`box-${index}`}
-            className="bar w-8 text-center bg-[#41B3A2] rounded text-white font-bold"
+            className="bar w-6 sm:w-8 text-center bg-[#41B3A2] rounded text-white font-bold text-xs sm:text-sm"
             style={{
-              height: "50px",
+              height: "40px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
