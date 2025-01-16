@@ -1,11 +1,49 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import bubbleSortImg from "../../images/image1.jpg";
+import bfsImg from "../../images/image2.jpg";
+import dijkstraImg from "../../images/image3.jpg";
+import mergeSortImg from "../../images/image4.jpg";
+
+const algorithms = [
+  {
+    title: "Sorting Algorithms",
+    description:
+      "Visualize popular sorting algorithms like Bubble Sort, Merge Sort, and more.",
+    image: bubbleSortImg,
+    algorithms: ["Bubble Sort", "Merge Sort", "Heap Sort", "Counting Sort"],
+    link: "/algorithm#sorting",
+  },
+  {
+    title: "Graph Algorithms",
+    description:
+      "Explore graph algorithms like DFS, BFS, and pathfinding algorithms.",
+    image: bfsImg,
+    algorithms: ["DFS", "BFS", "Dijkstra's", "A*"],
+    link: "/algorithm#graph",
+  },
+  {
+    title: "Pathfinding Algorithms",
+    description:
+      "Learn about pathfinding algorithms through interactive visualizations.",
+    image: dijkstraImg,
+    algorithms: ["Dijkstra's", "A*"],
+    link: "/algorithm#pathfinding",
+  },
+  {
+    title: "More Sorting Algorithms",
+    description:
+      "Discover advanced sorting techniques and their implementations.",
+    image: mergeSortImg,
+    algorithms: ["Merge Sort", "Quick Sort"],
+    link: "/algorithm#advanced-sorting",
+  },
+];
 
 const HomePage = () => {
   return (
     <main className="flex-1 bg-[#BDE8CA] py-12">
       <div className="container mx-auto px-4">
-        
         {/* Quote Section */}
         <div className="text-center my-12 max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
           <blockquote className="text-2xl font-extrabold text-[#0D7C66]">
@@ -13,29 +51,42 @@ const HomePage = () => {
           </blockquote>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
-  {[
-    { src: '/images/image1.jpg', algorithm: 'Bubble Sort' },
-    { src: '/images/image2.jpg', algorithm: 'Breadth First Search (BFS)' },
-    { src: '/images/image3.jpg', algorithm: "Dijkstra's Algorithm" },
-    { src: '/images/image4.jpg', algorithm: 'Merge Sort' },
-  ].map(({ src, algorithm }, i) => (
-    <Link
-      key={i}
-      to={`/algorithm?name=${encodeURIComponent(algorithm)}`} // Add algorithm as a query parameter
-      className="aspect-[4/3] bg-[#41B3A2] rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-300 p-2 border-4 border-white"
-    >
-      <div className="w-full h-full rounded-lg overflow-hidden">
-        <img
-          src={src}
-          alt={`Algorithm ${algorithm}`}
-          className="w-full h-full object-cover rounded-lg"
-        />
-      </div>
-    </Link>
-  ))}
-</div>
-
+        {/* Algorithm Categories */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {algorithms.map((category, index) => (
+            <Link
+              key={index}
+              to={category.link}
+              className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col h-full"
+            >
+              <div className="relative h-40">
+                <img
+                  src={category.image}
+                  alt={category.title}
+                  className="w-full h-full object-contain bg-gray-100"
+                />
+              </div>
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="text-xl font-semibold text-[#0D7C66] mb-2">
+                  {category.title}
+                </h3>
+                <p className="text-gray-600 mb-4 text-sm flex-grow">
+                  {category.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {category.algorithms.map((algo, i) => (
+                    <span
+                      key={i}
+                      className="bg-[#BDE8CA] text-[#0D7C66] px-2 py-1 rounded-full text-xs"
+                    >
+                      {algo}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
 
         {/* View More Button */}
         <div className="text-center mt-8">
